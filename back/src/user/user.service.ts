@@ -20,12 +20,16 @@ export class UserService {
         return this.users;
     }
 
-    auth(user: User): boolean {
+    findById(id: String){
+        return this.users.find(elem => elem.id === id)
+    }
+
+    auth(user: User): User {
         const find = this.users.find(elem => {
             elem.name === user.name
             && elem.pw === user.pw
         });
 
-        return (find !== undefined)
+        return (find);
     }
 }
