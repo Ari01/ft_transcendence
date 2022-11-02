@@ -21,15 +21,14 @@ const Login = ({ setToken }) => {
 
     const getCredentials = (event) => {
         event.preventDefault()
-        const newCredentials = {
-            name: username,
-            pass: password
+        const newUser = {
+            username: username,
+            password: password
         }
-        console.log('credentials', newCredentials)
-        setCredentials(newCredentials)            
+
         axios
-            .get("http://localhost:3001/user/auth")
-            .then(response => console.log(response.data))
+            .post("http://localhost:3001/auth/login", newUser)
+            .then(response => console.log('response', response.data))
         setUsername('')
         setPassword('')
     }
