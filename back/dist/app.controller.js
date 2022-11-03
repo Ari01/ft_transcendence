@@ -15,27 +15,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
-const local_auth_guard_1 = require("./auth/local-auth.guard");
 const auth_service_1 = require("./auth/auth.service");
+const _42_guard_1 = require("./auth/42.guard");
 let AppController = class AppController {
     constructor(authService) {
         this.authService = authService;
     }
-    async login(req) {
-        return this.authService.login(req.user);
+    login() {
+        return;
+    }
+    redirect(res) {
+        res.send(200);
     }
     getProfile(req) {
         return req.user;
     }
 };
 __decorate([
-    (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
-    (0, common_1.Post)('auth/login'),
-    __param(0, (0, common_1.Request)()),
+    (0, common_1.Get)('login'),
+    (0, common_1.UseGuards)(_42_guard_1.FortyTwoAuthGuard),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "login", null);
+__decorate([
+    (0, common_1.Get)('redirect'),
+    (0, common_1.UseGuards)(_42_guard_1.FortyTwoAuthGuard),
+    __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], AppController.prototype, "login", null);
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "redirect", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('profile'),
@@ -45,7 +55,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getProfile", null);
 AppController = __decorate([
-    (0, common_1.Controller)(),
+    (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AppController);
 exports.AppController = AppController;

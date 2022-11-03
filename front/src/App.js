@@ -4,11 +4,11 @@ import Login from './pages/login'
 import HomePage from './pages/homepage'
 
 function App() {
-  const [token, setToken] = useState(false)
+  /*const [token, setToken] = useState(false)
 
   if (!token) {
     return <Login setToken={setToken} />
-  }
+  }*/
 
   return (
       <HomePage />
